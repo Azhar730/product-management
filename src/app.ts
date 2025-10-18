@@ -18,10 +18,7 @@ app.use("/api/v1/uploads", express.static("uploads"));
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "https://livieeo-frontend.vercel.app",
-      "https://patakemvingir.com"
+      "http://localhost:3000"
     ], // frontend URL
     credentials: true, // allow credentials (cookies, auth headers)
   })
