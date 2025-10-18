@@ -13,6 +13,15 @@ const registerUser = catchAsync(async (req, res) => {
         data: result,
     });
 })
+const registerSeller = catchAsync(async (req, res) => {
+    const result = await UserServices.registerSellerIntoDB(req.body);
+    sendResponse(res, {
+        statusCode: httpStatus.CREATED,
+        success: true,
+        message: `Seller registered successfully`,
+        data: result,
+    });
+})
 
 const getAllUser = catchAsync(async (req, res) => {
     const result = await UserServices.getAllUserFromDB(req.query);
@@ -63,6 +72,7 @@ export const UserController = {
     getAllUser,
     userProfile,
     updateProfile,
-    updateUserRole
+    updateUserRole,
+    registerSeller
 }
  

@@ -13,8 +13,6 @@ const loginUser = catchAsync(async (req, res) => {
     httpOnly: true,
   };
  
-  console.log(result,'checking result is here');
- 
   res.cookie("refreshToken", result?.accessToken, cookieOptions);
  
   sendResponse(res, {

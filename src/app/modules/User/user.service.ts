@@ -26,6 +26,25 @@ const registerUserIntoDB = async (payload: User) => {
     const result = await prisma.user.create({ data: payload });
     return result
 }
+const registerSellerIntoDB = async (payload: User) => {
+    // 1. Check if user exists
+    const existingUser = await prisma.user.findUnique({
+        where: { email: payload.email },
+    });
+
+    if (existingUser) {
+        throw new ApiError(httpStatus.CONFLICT, "User already exists");
+    }
+
+    // 3. Hash password
+    const hashedPassword = await bcrypt.hash(payload.password, 12);
+    payload.password = hashedPassword;
+    // 4. Set role to SELLER
+    payload.role = UserRole.SELLER;
+    // 5. Save user in DB (unverified)
+    const result = await prisma.user.create({ data: payload });
+    return result
+}
 
 const getAllUserFromDB = async (query: Record<string, any>): Promise<IGenericResponse<User[]>> => {
     const queryBuilder = new QueryBuilder(prisma.user, query);
@@ -95,6 +114,7 @@ const updateUserRole = async (id: string, role: UserRole) => {
 
 export const UserServices = {
     registerUserIntoDB,
+    registerSellerIntoDB,
     getAllUserFromDB,
     updateProfile,
     updateUserRole,

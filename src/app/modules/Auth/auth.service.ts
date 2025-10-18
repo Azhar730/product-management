@@ -6,7 +6,6 @@ import httpStatus from "http-status";
 import ApiError from "../../../errors/ApiError";
 import { JWTHelpers } from "../../../helpers/jwtHelper";
 import emailSender from "./emailSender";
-import { EmailTemplates } from "./emailTemplates";
 
 interface ChangePasswordPayload {
   oldPassword: string;
