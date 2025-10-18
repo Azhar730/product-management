@@ -1,0 +1,37 @@
+import { Router } from "express";
+import auth from "../../middlewares/auth";
+import { UserRole } from "@prisma/client";
+import { AuthControllers } from "./auth.controller";
+import { AuthValidator } from "./auth.validation";
+import { validateRequest } from "../../middlewares/validateRequest";
+
+const router = Router();
+
+// login
+router.post("/login", validateRequest(AuthValidator.login), AuthControllers.loginUser);
+
+// refresh token
+router.post("/refresh-token", validateRequest(AuthValidator.refreshToken), AuthControllers.refreshToken);
+
+// change password (must be logged in)
+router.post(
+  "/change-password",
+  validateRequest(AuthValidator.changePassword),
+  AuthControllers.changePassword
+);
+
+// forgot password (send OTP)
+router.post(
+  "/forgot-password",
+  validateRequest(AuthValidator.forgotPassword),
+  AuthControllers.forgotPassword
+);
+
+// reset password (with OTP)
+router.post(
+  "/reset-password",
+  validateRequest(AuthValidator.resetPasswordValidation),
+  AuthControllers.resetPassword
+);
+
+export const AuthRoutes = router;
