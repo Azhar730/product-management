@@ -39,7 +39,7 @@
     "stripe": "^18.4.0",
     "ts-node-dev": "^2.0.0",
     "uuid": "^11.1.0",
-    "vercel": "^28.18.5",
+    "vercel": "^48.4.0",
     "zod": "^4.0.15"
   },
   "devDependencies": {
