@@ -1,5 +1,6 @@
+"use strict";
 // import prisma from "../shared/prisma";
-
+Object.defineProperty(exports, "__esModule", { value: true });
 // export const nextSequence = async (name: string) => {
 //   const upd = await prisma.counter.upsert({
 //     where: { name },
@@ -8,3 +9,4 @@
 //   });
 //   return upd.seq;
 // };
+//# sourceMappingURL=sequence.js.map
